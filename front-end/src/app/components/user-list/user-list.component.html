@@ -1,0 +1,58 @@
+<ng-container *ngIf="(users$ | async) as users">
+  <div class="pt-20 px-16">
+    <div class="border border-[#E0E0E0]">
+      <mat-table #table [dataSource]="users">
+        <ng-container matColumnDef="position">
+          <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index">
+            {{ i + 1 }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="firstname">
+          <mat-header-cell *matHeaderCellDef> Firstname </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.firstname }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lastname">
+          <mat-header-cell *matHeaderCellDef> Lastname </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.lastname }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.username }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.email }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="gender">
+          <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.gender }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="" (click)="openDialog(element)"><mat-icon>edit</mat-icon></span>
+            <span class=""> <button mat-icon-button (click)="deleteUser(element.id)">
+              <mat-icon>delete</mat-icon>
+            </button></span>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</ng-container>
+
+<div class="absolute right-4 bottom-8 px-12">
+  <button mat-fab color="primary" (click)="openDialog(null)">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
